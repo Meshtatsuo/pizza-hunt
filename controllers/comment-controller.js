@@ -26,11 +26,11 @@ const commentController = {
     },
 
     //add reply to comment
-    addReply({ params, body }, res) {
+    addReply({ params, body },  res) {
       Comment.findOneAndUpdate(
         { _id: params.commentId },
         { $push: {replies: body } },
-        { new: true }
+        { new: true, runValidators: true }
       )
       .then(dbPizzaData => {
         if(!dbPizzaData) {
